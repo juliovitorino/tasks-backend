@@ -12,7 +12,7 @@ public class Task {
 
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String task;
 	
 	@Column(nullable = false)
