@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('Fase 1') {
             steps {
-                sh echo 'exeutando a fase 1'
+                sh 'echo exeutando a fase 1'
             }
         }
     }
