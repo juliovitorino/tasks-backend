@@ -62,6 +62,7 @@ pipeline {
             steps {
                 sh 'docker-compose build'
                 sh 'docker-compose up -d'
+                mail bcc: '', body: 'Deploy Realizado com sucesso da build_${BUILD_NUMBER}', cc: '', from: '', replyTo: '', subject: 'Deploy em Produção realizado build_${BUILD_NUMBER}', to: 'test@mailhog.local'
             }
         }        
     }
