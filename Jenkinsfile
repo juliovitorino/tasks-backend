@@ -1,12 +1,5 @@
 pipeline {
-    agent any
-    environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "locahost:8081"
-        NEXUS_REPOSITORY = "ms-maven-snapshots"
-        NEXUS_CREDENTIAL_ID = "nexus-user-credentials"
-    }    
+    agent any 
     stages {
         stage ('Build Backend') {
             steps {
@@ -66,6 +59,13 @@ pipeline {
             }
         }   
         stage("Publish Backend to Nexus Repository Manager") {
+            environment {
+                NEXUS_VERSION = "nexus3"
+                NEXUS_PROTOCOL = "http"
+                NEXUS_URL = "locahost:8081"
+                NEXUS_REPOSITORY = "ms-maven-snapshots"
+                NEXUS_CREDENTIAL_ID = "nexus-user-credential"
+            }   
             steps {
                 script {
                     pom = readMavenPom file: "pom.xml";
