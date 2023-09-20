@@ -81,8 +81,8 @@ pipeline {
                         error "*** File: ${artifactPath}, could not be found";
                     }
                 }
+                nexusArtifactUploader credentialsId: 'nexus_user_credential', groupId: 'br.ce.wcaquino', nexusUrl: 'locahost:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'ms-maven-repository', version: '1.0.0-SNAPSHOT'
             }
-            nexusArtifactUploader credentialsId: 'nexus_user_credential', groupId: 'br.ce.wcaquino', nexusUrl: 'locahost:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'ms-maven-repository', version: '1.0.0-SNAPSHOT'
         }             
         stage ('Deploy Produção') {
             steps {
