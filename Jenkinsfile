@@ -81,7 +81,7 @@ pipeline {
                         error "*** File: ${artifactPath}, could not be found";
                     }
                 }
-                nexusArtifactUploader credentialsId: 'nexus_user_credential', groupId: 'br.ce.wcaquino', nexusUrl: 'locahost:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'ms-maven-snapshots', version: '1.0.0-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'tasks-backend', classifier: '', file: 'target/tasks-backend.war', type: 'war']], credentialsId: 'nexus_user_credential', groupId: 'br.ce.wcaquino', nexusUrl: 'localhost:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'ms-maven-snapshot', version: '0.0.1-SNAPSHOT'
             }
         }             
         stage ('Deploy Produção') {
