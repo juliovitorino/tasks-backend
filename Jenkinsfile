@@ -62,7 +62,7 @@ pipeline {
             steps {
                 sh 'docker-compose build'
                 sh 'docker-compose up -d'
-                mail bcc: '', body: 'Deploy Realizado com sucesso da build_$BUILD_NUMBER}, cc: '', from: '', replyTo: '', subject: 'Deploy em Produção realizado build_$BUILD_NUMBER', to: 'test@mailhog.local'
+                mail bcc: '', body: 'Deploy Realizado com sucesso da build_$BUILD_NUMBER', cc: '', from: '', replyTo: '', subject: 'Deploy em Produção realizado build_$BUILD_NUMBER', to: 'test@mailhog.local'
             }
         }        
     }
@@ -72,11 +72,11 @@ pipeline {
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml'
         }
         unsuccessful {
-            emailext attachLog: true, body: 'See the log attached', subject: 'Build $BUILD_NUMBER has failed', to: 'test\@mailhog\.local'
+            emailext attachLog: true, body: 'See the log attached', subject: 'Build $BUILD_NUMBER has failed', to: 'test@mailhog.local'
         }
 
         fixed {
-            emailext attachLog: true, body: 'See the log attached', subject: 'Build $BUILD_NUMBER is fine!', to: 'test\@mailhog\.local'
+            emailext attachLog: true, body: 'See the log attached', subject: 'Build $BUILD_NUMBER is fine!', to: 'test@mailhog.local'
         }
 
     }
