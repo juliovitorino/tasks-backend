@@ -71,5 +71,13 @@ pipeline {
         always {
             junit allowEmptyResults: true, testResults: 'target/*.xml, api-test/target/*.xml'
         }
+        unsuccessful {
+            emailext attachLog: true, body: 'See the log attached', subject: 'Build $BUILD_NUMBER has failed', to: 'test@mailhog.local'
+        }
+
+        fixed {
+            emailext attachLog: true, body: 'See the log attached', subject: 'Build $BUILD_NUMBER is fine!', to: 'test@mailhog.local'
+        }
+
     }
 }
