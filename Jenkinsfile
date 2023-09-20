@@ -66,4 +66,10 @@ pipeline {
             }
         }        
     }
+
+    post  {
+        always {
+            junit allowEmptyResults: true, testResults: 'target/*.xml, api-test/target/*.xml'
+        }
+    }
 }

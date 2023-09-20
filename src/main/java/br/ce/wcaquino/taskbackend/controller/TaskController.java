@@ -27,6 +27,11 @@ public class TaskController {
 	public List<Task> findAll() {
 		return todoRepo.findAll();
 	}
+
+	@GetMapping("/status")
+	public ResponseEntity status() {
+		return ResponseEntity.ok("Task Up");
+	}
 	
 	@PostMapping
 	public ResponseEntity<Task> save(@RequestBody Task todo) throws ValidationException {
