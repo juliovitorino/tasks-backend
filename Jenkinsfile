@@ -1,3 +1,4 @@
+def MS_GROUP_ID
 pipeline {
     agent any 
     stages {
@@ -75,30 +76,13 @@ pipeline {
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        );
+                        MS_GROUP_ID = ${pom.groupId}
                     } else {
                         error "*** File: ${artifactPath}, could not be found";
                     }
                 }
             }
+            nexusArtifactUploader credentialsId: 'nexus_user_credential', groupId: 'br.ce.wcaquino', nexusUrl: 'locahost:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'ms-maven-repository', version: '1.0.0-SNAPSHOT'
         }             
         stage ('Deploy Produção') {
             steps {
