@@ -69,7 +69,7 @@ pipeline {
 
     post  {
         always {
-            junit allowEmptyResults: true, testResults: 'target/*.xml, api-test/target/*.xml'
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml'
         }
         unsuccessful {
             emailext attachLog: true, body: 'See the log attached', subject: 'Build $BUILD_NUMBER has failed', to: 'test@mailhog.local'
