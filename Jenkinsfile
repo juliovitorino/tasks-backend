@@ -68,19 +68,6 @@ pipeline {
                 NEXUS_CREDENTIAL_ID = "nexus-user-credential"
             }   
             steps {
-                script {
-                    pom = readMavenPom file: "pom.xml";
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        MS_GROUP_ID = ${pom.groupId}
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
-                    }
-                }
                 nexusArtifactUploader artifacts: [[artifactId: 'tasks-backend', classifier: '', file: 'target/tasks-backend.war', type: 'war']], credentialsId: 'nexus_user_credential', groupId: 'br.ce.wcaquino', nexusUrl: 'localhost:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'ms-maven-snapshot', version: '0.0.1-SNAPSHOT'
             }
         }             
